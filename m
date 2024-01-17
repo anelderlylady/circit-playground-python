@@ -1,30 +1,17 @@
-import RPi.GPIO as GPIO
+# Save on CPX/CPB as code.py
+# Blinks the top right RED LED
+import board
+import digitalio
 import time
 
-# Set the GPIO mode to BCM
-GPIO.setmode(GPIO.BCM)
+led = digitalio.DigitalInOut(board.LED)
+led.direction = digitalio.Direction.OUTPUT
 
-# Set the pin number
-pin = 13
-
-# Set the pin as an output
-GPIO.setup(pin, GPIO.OUT)
-
-try:
-    while True:
-        # Turn the LED on
-        GPIO.output(pin, GPIO.HIGH)
-        time.sleep(1)  # Wait for 1 second
-        
-        # Turn the LED off
-        GPIO.output(pin, GPIO.LOW)
-        time.sleep(1)  # Wait for 1 second
-
-except KeyboardInterrupt:
-    # Cleanup GPIO on keyboard interrupt
-    GPIO.cleanup()
-
-
+while True:
+    led.value = True
+    time.sleep(0.1)
+    led.value = False
+    time.sleep(0.1)
 
 
 
